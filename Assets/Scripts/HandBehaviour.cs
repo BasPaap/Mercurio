@@ -11,7 +11,7 @@ public class HandBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        videoPlayer = GetComponent<VideoPlayer>();        
+        videoPlayer = GetComponent<VideoPlayer>();
         videoPlayer.Prepare();
     }
 
@@ -20,12 +20,18 @@ public class HandBehaviour : MonoBehaviour
         videoPlayer.Play();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            Play();
-        }
+        ControlSystemBehaviour.HandTriggered += ControlSystemBehaviour_HandTriggered;        
     }
 
+    private void OnDisable()
+    {
+        ControlSystemBehaviour.HandTriggered -= ControlSystemBehaviour_HandTriggered;        
+    }
+
+    private void ControlSystemBehaviour_HandTriggered(object sender, System.EventArgs e)
+    {
+        Play();
+    }
 }
