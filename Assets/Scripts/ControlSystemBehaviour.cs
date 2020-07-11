@@ -7,10 +7,12 @@ public class ControlSystemBehaviour : MonoBehaviour
 {
     public static event EventHandler HandTriggered;
     public static event EventHandler<bool> DancingLightsToggled;
+    public static event EventHandler<int> VoiceToggled;
 
     public KeyCode handTriggerKey = KeyCode.H;
     public KeyCode dancingLightsOnKey = KeyCode.L;
     public KeyCode dancingLightsOffKey = KeyCode.K;
+    public KeyCode[] voiceKeys = new[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
         
     // Update is called once per frame
     void Update()
@@ -29,5 +31,16 @@ public class ControlSystemBehaviour : MonoBehaviour
         {
             DancingLightsToggled(this, false);
         }
+
+        foreach (var voiceKey in voiceKeys)
+        {
+            if (Input.GetKeyUp(voiceKey) && VoiceToggled != null)
+            {
+                int voiceId = GetNumberKeyAsInt(voiceKey);
+                VoiceToggled(this, voiceId);
+            }
+        }
     }
+
+    private static int GetNumberKeyAsInt(KeyCode voiceKey) => (int)voiceKey - (int)KeyCode.Alpha0;    
 }
