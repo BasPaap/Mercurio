@@ -5191,7 +5191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voiceId: 1
   speed: 1
-  range: 1
+  range: 5
 --- !u!1 &255354419
 GameObject:
   m_ObjectHideFlags: 0
@@ -5334,7 +5334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voiceId: 3
   speed: 1
-  range: 1
+  range: 5
 --- !u!1 &269424238
 GameObject:
   m_ObjectHideFlags: 0
@@ -5564,7 +5564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voiceId: 2
   speed: 1
-  range: 1
+  range: 5
 --- !u!1 &1410650662
 GameObject:
   m_ObjectHideFlags: 0
@@ -5993,7 +5993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voiceId: 4
   speed: 1
-  range: 1
+  range: 5
 --- !u!1001 &2068660603
 PrefabInstance:
   m_ObjectHideFlags: 0
