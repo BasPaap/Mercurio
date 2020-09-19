@@ -18,6 +18,7 @@ public class HandBehaviour : MonoBehaviour
     public void Play()
     {
         videoPlayer.Play();
+        HardwareHostBehaviour.SendCommand(HardwareCommand.Kick);
     }
 
     private void OnEnable()
