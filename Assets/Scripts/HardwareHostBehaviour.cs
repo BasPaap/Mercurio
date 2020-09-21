@@ -51,7 +51,7 @@ public class HardwareHostBehaviour : MonoBehaviour
         if (isConnected)
         {
             var commandToSend = serialCommands[command];
-            serialPort.WriteLine(commandToSend);
+            serialPort.Write($"{commandToSend}\n");
             Debug.Log($"Writing command {commandToSend} to port {serialPort.PortName}.");
         }
     }
