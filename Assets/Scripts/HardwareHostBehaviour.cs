@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -24,14 +25,17 @@ public class HardwareHostBehaviour : MonoBehaviour
         serialCommands.Add(HardwareCommand.TurnSecondFanOn, "FAN2_ON");
         serialCommands.Add(HardwareCommand.TurnSecondFanOff, "FAN2_OFF");
         serialCommands.Add(HardwareCommand.Kick, "KICK");
-        
-        serialPort = new SerialPort(portName, baudRate);        
-        serialPort.Open();        
+
+        if (SerialPort.GetPortNames().Contains(portName))
+        {
+            serialPort = new SerialPort(portName, baudRate);
+            serialPort.Open();
+        }
     }
 
     private void Update()
     {
-        if (!isConnected && serialPort.BytesToRead != 0)
+        if (!isConnected && serialPort != null && serialPort.IsOpen && serialPort.BytesToRead != 0)
         {            
             var readLine = serialPort.ReadLine();
             Debug.Log($"Received response on serial port {portName}: {readLine}");
