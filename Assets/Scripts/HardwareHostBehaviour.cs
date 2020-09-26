@@ -52,9 +52,11 @@ public class HardwareHostBehaviour : MonoBehaviour
 
     public static void SendCommand(HardwareCommand command)
     {
+        var commandToSend = serialCommands[command];
+        Debug.Log($"SendCommand called for {commandToSend} command.");
+
         if (isConnected)
-        {
-            var commandToSend = serialCommands[command];
+        {            
             serialPort.Write($"{commandToSend}\n");
             Debug.Log($"Writing command {commandToSend} to port {serialPort.PortName}.");
         }
