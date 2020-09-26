@@ -62,6 +62,6 @@ public class HardwareHostBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-        serialPort.Close();        
+        serialPort?.Close();        
     }
 }
