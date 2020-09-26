@@ -5365,6 +5365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handTriggerKey: 104
+  maskTriggerKey: 109
   dancingLightsOnKey: 108
   dancingLightsOffKey: 107
   voiceKeys: 31000000320000003300000034000000

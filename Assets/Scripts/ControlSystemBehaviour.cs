@@ -8,11 +8,14 @@ public class ControlSystemBehaviour : MonoBehaviour
     public static event EventHandler HandTriggered;
     public static event EventHandler<bool> DancingLightsToggled;
     public static event EventHandler<int> VoiceToggled;
+    public static event EventHandler MaskTriggered;
 
     public KeyCode handTriggerKey = KeyCode.H;
+    public KeyCode maskTriggerKey = KeyCode.M;
     public KeyCode dancingLightsOnKey = KeyCode.L;
     public KeyCode dancingLightsOffKey = KeyCode.K;
     public KeyCode[] voiceKeys = new[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
+    
         
     // Update is called once per frame
     void Update()
@@ -20,6 +23,11 @@ public class ControlSystemBehaviour : MonoBehaviour
         if (Input.GetKeyUp(handTriggerKey) && HandTriggered != null)
         {
             HandTriggered(this, EventArgs.Empty);
+        }
+
+        if (Input.GetKeyUp(maskTriggerKey) && MaskTriggered != null)
+        {
+            MaskTriggered(this, EventArgs.Empty);
         }
 
         if (Input.GetKeyUp(dancingLightsOnKey) && DancingLightsToggled != null)
