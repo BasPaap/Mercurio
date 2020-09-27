@@ -5432,6 +5432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handTriggerKey: 104
   maskTriggerKey: 109
+  crackTriggerKey: 99
   dancingLightsOnKey: 108
   dancingLightsOffKey: 107
   voiceKeys: 31000000320000003300000034000000
@@ -5460,6 +5461,7 @@ GameObject:
   - component: {fileID: 418036954}
   - component: {fileID: 418036956}
   - component: {fileID: 418036955}
+  - component: {fileID: 418036957}
   m_Layer: 0
   m_Name: Crack
   m_TagString: Untagged
@@ -5528,6 +5530,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 418036953}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &418036957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 418036953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ee86fa6e2b7c24fa0ee506e27a038b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &981987994
 GameObject:
   m_ObjectHideFlags: 0
