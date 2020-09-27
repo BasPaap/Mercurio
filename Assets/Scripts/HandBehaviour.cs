@@ -19,7 +19,7 @@ public class HandBehaviour : MonoBehaviour
         videoPlayer.Prepare();
     }
 
-    public void Play()
+    private void Play()
     {
         videoPlayer.Play();
         this.Wait(kickDelay, () => HardwareHostBehaviour.SendCommand(HardwareCommand.Kick));        
