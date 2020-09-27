@@ -8,7 +8,7 @@ public class HandBehaviour : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Number of seconds to wait until activating the kicker.")]
-    private float kickDelay;
+    private float kickDelay = 1.0f;
 
     private VideoPlayer videoPlayer;
 
