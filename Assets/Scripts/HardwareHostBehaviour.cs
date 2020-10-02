@@ -13,13 +13,13 @@ public class HardwareHostBehaviour : MonoBehaviour
     public int baudRate;
     public string handshake;
     public string expectedResponse;
-        
+
     private static SerialPort serialPort;
-    private static Dictionary<HardwareCommand, string> serialCommands = new Dictionary<HardwareCommand, string>();        
+    private static Dictionary<HardwareCommand, string> serialCommands = new Dictionary<HardwareCommand, string>();
     private static bool isConnected = false;
 
     private void Start()
-    {        
+    {
         serialCommands.Add(HardwareCommand.TurnFirstFanOn, "FAN1_ON");
         serialCommands.Add(HardwareCommand.TurnFirstFanOff, "FAN1_OFF");
         serialCommands.Add(HardwareCommand.TurnSecondFanOn, "FAN2_ON");
@@ -30,18 +30,23 @@ public class HardwareHostBehaviour : MonoBehaviour
         {
             serialPort = new SerialPort(portName, baudRate);
             serialPort.Open();
+            
+            Debug.Log("Serial port open");
         }
     }
 
     private void Update()
     {
-        if (!isConnected && serialPort != null && serialPort.IsOpen && serialPort.BytesToRead != 0)
-        {            
-            var readLine = serialPort.ReadLine();
-            Debug.Log($"Received response on serial port {portName}: {readLine}");
-            if (readLine == expectedResponse)
-            {                
-                isConnected = true;
+        if (!isConnected && serialPort != null && serialPort.IsOpen)
+        {
+            if (serialPort.BytesToRead > 0)
+            {
+                var readLine = serialPort.ReadLine();
+                Debug.Log($"Received response on serial port {portName}: {readLine}");
+                if (readLine == expectedResponse)
+                {
+                    isConnected = true;
+                }
             }
             else
             {
@@ -56,7 +61,7 @@ public class HardwareHostBehaviour : MonoBehaviour
         Debug.Log($"SendCommand called for {commandToSend} command.");
 
         if (isConnected)
-        {            
+        {
             serialPort.Write($"{commandToSend}\n");
             Debug.Log($"Writing command {commandToSend} to port {serialPort.PortName}.");
         }
@@ -64,6 +69,6 @@ public class HardwareHostBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-        serialPort?.Close();        
+        serialPort?.Close();
     }
 }
