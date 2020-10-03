@@ -9,8 +9,6 @@ using UnityEngine;
 
 public class HardwareHostBehaviour : MonoBehaviour
 {
-    public string portName;
-    public int baudRate;
     public string handshake;
     public string expectedResponse;
 
@@ -26,9 +24,11 @@ public class HardwareHostBehaviour : MonoBehaviour
         serialCommands.Add(HardwareCommand.TurnSecondFanOff, "FAN2_OFF");
         serialCommands.Add(HardwareCommand.Kick, "KICK");
 
-        if (SerialPort.GetPortNames().Contains(portName))
+        var settings = Settings.Load();
+
+        if (SerialPort.GetPortNames().Contains(settings.PortName))
         {
-            serialPort = new SerialPort(portName, baudRate);
+            serialPort = new SerialPort(settings.PortName, settings.BaudRate);
             serialPort.Open();
             
             Debug.Log("Serial port open");
@@ -42,7 +42,7 @@ public class HardwareHostBehaviour : MonoBehaviour
             if (serialPort.BytesToRead > 0)
             {
                 var readLine = serialPort.ReadLine();
-                Debug.Log($"Received response on serial port {portName}: {readLine}");
+                Debug.Log($"Received response on serial port {serialPort.PortName}: {readLine}");
                 if (readLine == expectedResponse)
                 {
                     isConnected = true;
