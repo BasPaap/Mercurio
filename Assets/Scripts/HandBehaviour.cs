@@ -6,10 +6,6 @@ using UnityEngine.Video;
 [RequireComponent(typeof(VideoPlayer))]
 public class HandBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("Number of seconds to wait until activating the kicker.")]
-    private float kickDelay = 1.0f;
-
     private VideoPlayer videoPlayer;
 
     // Start is called before the first frame update
@@ -21,8 +17,9 @@ public class HandBehaviour : MonoBehaviour
 
     private void Play()
     {
+        var settings = Settings.Load();
         videoPlayer.Play();
-        this.Wait(kickDelay, () => HardwareHostBehaviour.SendCommand(HardwareCommand.Kick));        
+        this.Wait(settings.KickDelay, () => HardwareHostBehaviour.SendCommand(HardwareCommand.Kick));        
     }
 
     private void OnEnable()

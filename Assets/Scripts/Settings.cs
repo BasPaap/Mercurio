@@ -9,8 +9,9 @@ public class Settings
     private const string directoryName = "Mercurio";
     private const string fileName = "settings.xml";
 
-    public string PortName { get; set; }
-    public int BaudRate { get; set; }
+    public string PortName { get; set; } = "COM1";
+    public int BaudRate { get; set; } = 9600;
+    public float KickDelay { get; set; } = 0.4f;
 
     public static Settings Load()
     {
@@ -27,7 +28,7 @@ public class Settings
 
         if (!File.Exists(fullPath))
         {
-            settings = new Settings { PortName = "COM1", BaudRate = 9600 };
+            settings = new Settings();
 
             using (var fileStream = new FileStream(fullPath, FileMode.Create))
             {
