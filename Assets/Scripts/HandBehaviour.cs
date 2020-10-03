@@ -26,7 +26,7 @@ public class HandBehaviour : MonoBehaviour
     {
         ControlSystemBehaviour.HandTriggered += ControlSystemBehaviour_HandTriggered;        
     }
-
+    
     private void OnDisable()
     {
         ControlSystemBehaviour.HandTriggered -= ControlSystemBehaviour_HandTriggered;        

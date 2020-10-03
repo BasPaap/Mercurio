@@ -13,31 +13,41 @@ public class Settings
     public int BaudRate { get; set; } = 9600;
     public float KickDelay { get; set; } = 0.4f;
 
+    private static string SettingsDirectoryPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), directoryName);
+    private static string FullPath => Path.Combine(SettingsDirectoryPath, fileName);
+
+    public void Save()
+    {
+        var serializer = new XmlSerializer(typeof(Settings));
+        using (var fileStream = new FileStream(FullPath, FileMode.Create))
+        {
+            serializer.Serialize(fileStream, this);
+            fileStream.Close();
+        }
+    }
+
     public static Settings Load()
     {
-        var settingsDirectoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), directoryName);
-
-        if (!Directory.Exists(settingsDirectoryPath))
+        if (!Directory.Exists(SettingsDirectoryPath))
         {
-            Directory.CreateDirectory(settingsDirectoryPath);
+            Directory.CreateDirectory(SettingsDirectoryPath);
         }
-
-        var fullPath = Path.Combine(settingsDirectoryPath, fileName);
+                
         Settings settings = null;
         var serializer = new XmlSerializer(typeof(Settings));
 
-        if (!File.Exists(fullPath))
+        if (!File.Exists(FullPath))
         {
             settings = new Settings();
 
-            using (var fileStream = new FileStream(fullPath, FileMode.Create))
+            using (var fileStream = new FileStream(FullPath, FileMode.Create))
             {
                 serializer.Serialize(fileStream, settings);
             }
         }
         else
         {
-            using (var fileStream = new FileStream(fullPath, FileMode.Open))
+            using (var fileStream = new FileStream(FullPath, FileMode.Open))
             {
                 settings = (Settings)serializer.Deserialize(fileStream);
             }

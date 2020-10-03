@@ -16,9 +16,11 @@ public class ControlSystemBehaviour : MonoBehaviour
     public KeyCode crackTriggerKey = KeyCode.C;
     public KeyCode dancingLightsOnKey = KeyCode.L;
     public KeyCode dancingLightsOffKey = KeyCode.K;
+    public KeyCode increaseKickDelayKey = KeyCode.RightBracket;
+    public KeyCode decreaseKickDelayKey = KeyCode.LeftBracket;
     public KeyCode[] voiceKeys = new[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
-    
-        
+
+
     // Update is called once per frame
     void Update()
     {
@@ -45,6 +47,20 @@ public class ControlSystemBehaviour : MonoBehaviour
         if (Input.GetKeyUp(dancingLightsOffKey) && DancingLightsToggled != null)
         {
             DancingLightsToggled(this, false);
+        }
+
+        if (Input.GetKeyUp(increaseKickDelayKey))
+        {
+            var settings = Settings.Load();
+            settings.KickDelay += 0.1f;
+            settings.Save();
+        }
+
+        if (Input.GetKeyUp(decreaseKickDelayKey))
+        {
+            var settings = Settings.Load();
+            settings.KickDelay = Mathf.Max(0.0f, settings.KickDelay - 0.1f);
+            settings.Save();
         }
 
         foreach (var voiceKey in voiceKeys)
