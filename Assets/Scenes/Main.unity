@@ -5556,7 +5556,7 @@ GameObject:
   - component: {fileID: 808431757}
   - component: {fileID: 808431756}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Flakes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5656,7 +5656,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -10308,6 +10308,50 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &876450665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7293429809941653865, guid: 126631c19c95b18498423fffe862cd96,
+    type: 3}
+  m_PrefabInstance: {fileID: 1086692062}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &876450668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876450665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d3311b28a889a4cbcfa0d51c8b9b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnEffectTime: 4
+  pause: 3
+  fadeIn:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &981987994
 GameObject:
   m_ObjectHideFlags: 0
@@ -10690,6 +10734,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 1.32
       objectReference: {fileID: 0}
+    - target: {fileID: 3755187740112208922, guid: 126631c19c95b18498423fffe862cd96,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c45475b6860992f4293b4ce7dbd798f2, type: 2}
     - target: {fileID: 4224801822505238522, guid: 126631c19c95b18498423fffe862cd96,
         type: 3}
       propertyPath: m_Layer

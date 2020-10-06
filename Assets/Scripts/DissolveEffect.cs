@@ -16,7 +16,7 @@ public class DissolveEffect : MonoBehaviour
 
     void Start()
     {
-        shaderProperty = Shader.PropertyToID("_cutoff");
+        shaderProperty = Shader.PropertyToID("_Progress");
         _renderer = GetComponent<Renderer>();
         //ps = GetComponentInChildren<ParticleSystem>();
 
