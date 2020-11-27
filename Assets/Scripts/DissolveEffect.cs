@@ -5,42 +5,30 @@ using UnityEngine;
 public class DissolveEffect : MonoBehaviour
 {
     public float spawnEffectTime = 2;
-    public float pause = 1;
-    public AnimationCurve fadeIn;
+    public float pauseTime = 1;
+    public AnimationCurve fadeInCurve;
 
-    //ParticleSystem ps;
-    float timer = 0;
-    Renderer _renderer;
-
-    int shaderProperty;
+    private float elapsedTime = 0;
+    private new Renderer renderer;
+    private int progressPropertyId;
 
     void Start()
     {
-        shaderProperty = Shader.PropertyToID("_Progress");
-        _renderer = GetComponent<Renderer>();
-        //ps = GetComponentInChildren<ParticleSystem>();
-
-        //var main = ps.main;
-        //main.duration = spawnEffectTime;
-
-        //ps.Play();
-
+        progressPropertyId = Shader.PropertyToID("_Progress");
+        renderer = GetComponent<Renderer>();        
     }
 
     void Update()
     {
-        if (timer < spawnEffectTime + pause)
+        if (elapsedTime < spawnEffectTime + pauseTime)
         {
-            timer += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
         }
         else
-        {
-            //ps.Play();
-            timer = 0;
+        {            
+            elapsedTime = 0;
         }
 
-
-        _renderer.material.SetFloat(shaderProperty, fadeIn.Evaluate(Mathf.InverseLerp(0, spawnEffectTime, timer)));
-
+        renderer.material.SetFloat(progressPropertyId, fadeInCurve.Evaluate(Mathf.InverseLerp(0, spawnEffectTime, elapsedTime)));
     }
 }
