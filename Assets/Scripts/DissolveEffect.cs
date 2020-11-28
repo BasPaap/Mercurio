@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class DissolveEffect : MonoBehaviour
 {
-    public float spawnEffectTime = 2;
-    public float pauseTime = 1;
+    [Range(0, 1.0f)]
+    public float progress;
     public AnimationCurve fadeInCurve;
 
-    private float elapsedTime = 0;
     private new Renderer renderer;
     private int progressPropertyId;
-
+    
+    
     void Start()
     {
         progressPropertyId = Shader.PropertyToID("_Progress");
@@ -19,16 +19,7 @@ public class DissolveEffect : MonoBehaviour
     }
 
     void Update()
-    {
-        if (elapsedTime < spawnEffectTime + pauseTime)
-        {
-            elapsedTime += Time.deltaTime;
-        }
-        else
-        {            
-            elapsedTime = 0;
-        }
-
-        renderer.material.SetFloat(progressPropertyId, fadeInCurve.Evaluate(Mathf.InverseLerp(0, spawnEffectTime, elapsedTime)));
+    {        
+        renderer.material.SetFloat(progressPropertyId, fadeInCurve.Evaluate(progress));
     }
 }
